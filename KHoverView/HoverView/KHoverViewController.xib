@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HoverViewController" customModule="KHoverView" customModuleProvider="target">
+            <connections>
+                <outlet property="DraggableViewTopConstraint" destination="sA3-En-vbA" id="WQZ-Hq-qmP"/>
+                <outlet property="dragArea" destination="jat-aD-bnL" id="4qr-iT-jw2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8p-D7-oSW">
+                    <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jat-aD-bnL" userLabel="Drag Area">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can drag just from this view" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqs-C6-ZxN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Mqs-C6-ZxN" firstAttribute="leading" secondItem="jat-aD-bnL" secondAttribute="leading" id="NNS-Zf-yku"/>
+                                <constraint firstItem="Mqs-C6-ZxN" firstAttribute="top" secondItem="jat-aD-bnL" secondAttribute="top" id="bow-r0-zbL"/>
+                                <constraint firstAttribute="bottom" secondItem="Mqs-C6-ZxN" secondAttribute="bottom" id="lca-XD-VIr"/>
+                                <constraint firstAttribute="trailing" secondItem="Mqs-C6-ZxN" secondAttribute="trailing" id="sDb-oG-jdC"/>
+                                <constraint firstAttribute="height" constant="42" id="yXa-z2-feM"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6A-i8-DNt">
+                            <rect key="frame" x="0.0" y="42" width="375" height="569"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content Goes Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfN-2i-bQI">
+                                    <rect key="frame" x="114" y="274" width="147" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="TfN-2i-bQI" firstAttribute="centerY" secondItem="P6A-i8-DNt" secondAttribute="centerY" id="E8r-Du-3j1"/>
+                                <constraint firstItem="TfN-2i-bQI" firstAttribute="centerX" secondItem="P6A-i8-DNt" secondAttribute="centerX" id="FYf-oX-ffe"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="P6A-i8-DNt" secondAttribute="trailing" id="GYa-6Q-4fF"/>
+                        <constraint firstItem="P6A-i8-DNt" firstAttribute="leading" secondItem="H8p-D7-oSW" secondAttribute="leading" id="hKu-B1-w7e"/>
+                        <constraint firstItem="jat-aD-bnL" firstAttribute="leading" secondItem="H8p-D7-oSW" secondAttribute="leading" id="kLj-21-Uvu"/>
+                        <constraint firstItem="jat-aD-bnL" firstAttribute="top" secondItem="H8p-D7-oSW" secondAttribute="top" id="osr-35-pxf"/>
+                        <constraint firstAttribute="bottom" secondItem="P6A-i8-DNt" secondAttribute="bottom" id="qcA-Ov-qk1"/>
+                        <constraint firstAttribute="trailing" secondItem="jat-aD-bnL" secondAttribute="trailing" id="rkx-qL-luO"/>
+                        <constraint firstItem="P6A-i8-DNt" firstAttribute="top" secondItem="jat-aD-bnL" secondAttribute="bottom" id="seR-w2-seh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="H8p-D7-oSW" secondAttribute="bottom" id="ScE-Ga-GbB"/>
+                <constraint firstItem="H8p-D7-oSW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="je6-wz-cdq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="H8p-D7-oSW" secondAttribute="trailing" id="rud-mI-cXu"/>
+                <constraint firstItem="H8p-D7-oSW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="sA3-En-vbA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

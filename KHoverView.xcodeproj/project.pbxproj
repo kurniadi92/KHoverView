@@ -13,6 +13,10 @@
 		4A2EF5B4217383DC00B01EDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2EF5B3217383DC00B01EDE /* Assets.xcassets */; };
 		4A2EF5B7217383DC00B01EDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2EF5B5217383DC00B01EDE /* LaunchScreen.storyboard */; };
 		4A2EF5C2217383DC00B01EDE /* KHoverViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2EF5C1217383DC00B01EDE /* KHoverViewTests.swift */; };
+		4A2EF5D2217B761900B01EDE /* KHoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2EF5D0217B761900B01EDE /* KHoverViewController.swift */; };
+		4A2EF5D3217B761900B01EDE /* KHoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2EF5D1217B761900B01EDE /* KHoverViewController.xib */; };
+		4A2EF5D6217BF18E00B01EDE /* KHoverViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2EF5D5217BF18E00B01EDE /* KHoverViewModelTest.swift */; };
+		4A2EF5D8217BF48800B01EDE /* KHoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2EF5D7217BF48800B01EDE /* KHoverViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		4A2EF5BD217383DC00B01EDE /* KHoverViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KHoverViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2EF5C1217383DC00B01EDE /* KHoverViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KHoverViewTests.swift; sourceTree = "<group>"; };
 		4A2EF5C3217383DC00B01EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A2EF5D0217B761900B01EDE /* KHoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KHoverViewController.swift; sourceTree = "<group>"; };
+		4A2EF5D1217B761900B01EDE /* KHoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KHoverViewController.xib; sourceTree = "<group>"; };
+		4A2EF5D5217BF18E00B01EDE /* KHoverViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KHoverViewModelTest.swift; sourceTree = "<group>"; };
+		4A2EF5D7217BF48800B01EDE /* KHoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KHoverViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,7 @@
 		4A2EF5AB217383DA00B01EDE /* KHoverView */ = {
 			isa = PBXGroup;
 			children = (
+				4A2EF5D4217B799A00B01EDE /* HoverView */,
 				4A2EF5AC217383DA00B01EDE /* AppDelegate.swift */,
 				4A2EF5AE217383DA00B01EDE /* ViewController.swift */,
 				4A2EF5B0217383DA00B01EDE /* Main.storyboard */,
@@ -92,8 +101,19 @@
 			children = (
 				4A2EF5C1217383DC00B01EDE /* KHoverViewTests.swift */,
 				4A2EF5C3217383DC00B01EDE /* Info.plist */,
+				4A2EF5D5217BF18E00B01EDE /* KHoverViewModelTest.swift */,
 			);
 			path = KHoverViewTests;
+			sourceTree = "<group>";
+		};
+		4A2EF5D4217B799A00B01EDE /* HoverView */ = {
+			isa = PBXGroup;
+			children = (
+				4A2EF5D0217B761900B01EDE /* KHoverViewController.swift */,
+				4A2EF5D1217B761900B01EDE /* KHoverViewController.xib */,
+				4A2EF5D7217BF48800B01EDE /* KHoverViewModel.swift */,
+			);
+			path = HoverView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +200,7 @@
 				4A2EF5B7217383DC00B01EDE /* LaunchScreen.storyboard in Resources */,
 				4A2EF5B4217383DC00B01EDE /* Assets.xcassets in Resources */,
 				4A2EF5B2217383DA00B01EDE /* Main.storyboard in Resources */,
+				4A2EF5D3217B761900B01EDE /* KHoverViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +220,8 @@
 			files = (
 				4A2EF5AF217383DA00B01EDE /* ViewController.swift in Sources */,
 				4A2EF5AD217383DA00B01EDE /* AppDelegate.swift in Sources */,
+				4A2EF5D2217B761900B01EDE /* KHoverViewController.swift in Sources */,
+				4A2EF5D8217BF48800B01EDE /* KHoverViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2EF5D6217BF18E00B01EDE /* KHoverViewModelTest.swift in Sources */,
 				4A2EF5C2217383DC00B01EDE /* KHoverViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
