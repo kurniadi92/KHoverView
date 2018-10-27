@@ -31,7 +31,7 @@ class KHoverViewController: UIViewController {
     }
     
     fileprivate func setupViewModel() {
-        viewModel.bounceBack { [weak self] in
+        viewModel.bounceBack = { [weak self] in
             UIView.animate(withDuration: 0.1) {
                 self?.DraggableViewTopConstraint.constant = self?.maxTopConstraint ?? 36
                 
@@ -40,22 +40,24 @@ class KHoverViewController: UIViewController {
                 self?.view.setNeedsLayout()
             }
         }
-        viewModel.dismissView { [weak self] in
+        
+        viewModel.dismissView = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
+        }
+        
+        viewModel.updatePosition = { [weak self] gestureRecognizer in
+            let translation = gestureRecognizer.translation(in: self?.view)
+            self?.DraggableViewTopConstraint.constant = translation.y
+        }
+        
+        viewModel.touchReleased = { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.viewModel.touchUpAction(currentPosition: weakSelf.DraggableViewTopConstraint.constant, frameHeight: weakSelf.view.frame.height)
         }
     }
     
     @objc private func draggedAreaMove(_ gestureRecognizer: UIPanGestureRecognizer) {
-  
-        let state = DragState(rawValue: gestureRecognizer.state.rawValue) ?? DragState.cancelled
-        if viewModel.isNeedToUpdateDragPosition(state: state) {
-            let translation = gestureRecognizer.translation(in: self.view)
-            self.DraggableViewTopConstraint.constant = translation.y
-            
-        } else if (viewModel.isTouchUp(state: state)) {
-            
-            viewModel.touchUpAction(currentPosition: self.DraggableViewTopConstraint.constant, frameHeight: self.view.frame.height)
-        }
+        viewModel.touchDragAction(gestureRecognizer)
     }
     
 }

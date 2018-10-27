@@ -12,35 +12,12 @@ import XCTest
 
 class KHoverViewModelTest: XCTestCase {
 
-    func testIsNeedToUpdateDragPositionWhenStateBeganReturnTrue() {
-        let kHoverViewModel = KHoverViewModel()
-    
-        XCTAssertTrue(kHoverViewModel.isNeedToUpdateDragPosition(state: DragState.began))
-        XCTAssertFalse(kHoverViewModel.isNeedToUpdateDragPosition(state: DragState.ended))
-    }
-    
-    func testIsNeedToUpdateDragPositionWhenStateChangedReturnTrue() {
-        let kHoverViewModel = KHoverViewModel()
-        
-        XCTAssertTrue(kHoverViewModel.isNeedToUpdateDragPosition(state: DragState.changed))
-        XCTAssertFalse(kHoverViewModel.isNeedToUpdateDragPosition(state: DragState.ended))
-        
-    }
-    
-    func testIsTouchUpWhenStateEndedReturnTrue() {
-        let kHoverViewModel = KHoverViewModel()
-        
-        XCTAssertTrue(kHoverViewModel.isTouchUp(state: DragState.ended))
-        XCTAssertFalse(kHoverViewModel.isTouchUp(state: DragState.changed))
-        XCTAssertFalse(kHoverViewModel.isTouchUp(state: DragState.began))
-    }
-
     func testTouchUpActionTriggerDismissViewWhenCurrentPositionMoreThanHalfVCHeight() {
         
         let expectation = self.expectation(description: "Expect Dismiss View Triggered")
         var kHoverViewModel = KHoverViewModel()
     
-        kHoverViewModel.dismissView() {
+        kHoverViewModel.dismissView = {
             expectation.fulfill()
         }
         
@@ -54,12 +31,94 @@ class KHoverViewModelTest: XCTestCase {
         let expectation = self.expectation(description: "Expect Dismiss View Triggered")
         var kHoverViewModel = KHoverViewModel()
         
-        kHoverViewModel.bounceBack() {
+        kHoverViewModel.bounceBack = {
             expectation.fulfill()
         }
         
         kHoverViewModel.touchUpAction(currentPosition: 20, frameHeight: 100)
         self.waitForExpectations(timeout: 1, handler: nil)
         
+    }
+    
+    func testTouchDragActionTriggerUpdatePostionWhenStateBegan() {
+        let uiPanGestureExpected = UIPanGestureRecognizer()
+        uiPanGestureExpected.state = .began
+        
+        let expectation = self.expectation(description: "Expect update position Triggered")
+        var kHoverViewModel = KHoverViewModel()
+        
+        kHoverViewModel.updatePosition = { uiPanGesture in
+            XCTAssertEqual(uiPanGesture, uiPanGestureExpected)
+            expectation.fulfill()
+        }
+        
+        kHoverViewModel.touchDragAction(uiPanGestureExpected)
+        self.waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testTouchDragActionTriggerUpdatePostionWhenStateChanged() {
+        let uiPanGestureExpected = UIPanGestureRecognizer()
+        uiPanGestureExpected.state = .changed
+        
+        let expectation = self.expectation(description: "Expect update position Triggered")
+        var kHoverViewModel = KHoverViewModel()
+        
+        kHoverViewModel.updatePosition = { uiPanGesture in
+            XCTAssertEqual(uiPanGesture, uiPanGestureExpected)
+            expectation.fulfill()
+        }
+        
+        kHoverViewModel.touchDragAction(uiPanGestureExpected)
+        self.waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testTouchDragActionTriggerTouchReleasedWhenStateEnded() {
+        let uiPanGestureExpected = UIPanGestureRecognizer()
+        uiPanGestureExpected.state = .ended
+        
+        let expectation = self.expectation(description: "Expect touch released Triggered")
+        var kHoverViewModel = KHoverViewModel()
+        
+        kHoverViewModel.touchReleased = {
+            expectation.fulfill()
+        }
+        
+        kHoverViewModel.touchDragAction(uiPanGestureExpected)
+        self.waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testTouchDragNotTriggerAnythingStateFailedCanceledAndPossible() {
+        let actionStateDictionary: Dictionary<Int,String> = [UIPanGestureRecognizer.State.possible.rawValue: "possible",
+                                                             UIPanGestureRecognizer.State.failed.rawValue: "failed",
+                                                             UIPanGestureRecognizer.State.cancelled.rawValue: "cancelled"]
+        
+        let notActionedState:[UIPanGestureRecognizer.State] = [UIPanGestureRecognizer.State.possible,
+                                                             UIPanGestureRecognizer.State.failed,
+                                                             UIPanGestureRecognizer.State.cancelled]
+        
+        for state in notActionedState {
+            let uiPanGestureExpected = UIPanGestureRecognizer()
+            uiPanGestureExpected.state = state
+
+            var kHoverViewModel = KHoverViewModel()
+            
+            kHoverViewModel.touchReleased = {
+                XCTAssert(false, "state \(actionStateDictionary[state.rawValue]!) cannot trigger touch release")
+            }
+            
+            kHoverViewModel.updatePosition = { uiPanGesture in
+                XCTAssert(false, "state \(actionStateDictionary[state.rawValue]!) cannot trigger update position")
+            }
+            
+            kHoverViewModel.bounceBack = {
+                XCTAssert(false, "state \(actionStateDictionary[state.rawValue]!) cannot trigger bounce back")
+            }
+            
+            kHoverViewModel.dismissView = {
+                XCTAssert(false, "state \(actionStateDictionary[state.rawValue]!) cannot trigger dismiss view")
+            }
+            
+            kHoverViewModel.touchDragAction(uiPanGestureExpected)
+        }
     }
 }

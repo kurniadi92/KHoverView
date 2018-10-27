@@ -6,45 +6,37 @@
 //  Copyright © 2018 Kurniadi. All rights reserved.
 //
 
-enum DragState : Int {
-
-    case possible
-    case began
-    case changed
-    case ended
-    case cancelled
-    case failed
-}
-
 import Foundation
 import UIKit
 
 struct KHoverViewModel {
     
-    private var dismissAction: () -> () = {}
-    private var bounceAction: () -> () = {}
+    var dismissView: () -> () = {}
+    var bounceBack: () -> () = {}
+    var updatePosition: (UIPanGestureRecognizer) -> () = { _ in }
+    var touchReleased: () -> () = {}
     
-    mutating func dismissView(action: @escaping ()->() ) {
-        dismissAction = action
-    }
-    
-    mutating func bounceBack(action: @escaping ()->() ) {
-        bounceAction = action
-    }
-    
-    func isNeedToUpdateDragPosition(state: DragState) -> Bool {
+    fileprivate func isNeedToUpdateDragPosition(state: UIPanGestureRecognizer.State) -> Bool {
         return state == .began || state == .changed
     }
     
-    func isTouchUp(state: DragState) -> Bool {
+    fileprivate func isTouchUp(state: UIPanGestureRecognizer.State) -> Bool {
         return state == .ended
     }
     
     func touchUpAction(currentPosition:CGFloat , frameHeight: CGFloat){
         if(currentPosition > frameHeight / 2) {
-            dismissAction()
+            dismissView()
         } else {
-            bounceAction()
+            bounceBack()
+        }
+    }
+    
+    func touchDragAction(_ gestureRecognizer:UIPanGestureRecognizer) {
+        if isNeedToUpdateDragPosition(state: gestureRecognizer.state) {
+            updatePosition(gestureRecognizer)
+        } else if isTouchUp(state: gestureRecognizer.state) {
+            touchReleased()
         }
     }
 }
